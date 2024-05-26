@@ -1,12 +1,13 @@
 import React, { useRef, useState } from 'react'
 import Validation from '../utils/Validation'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Signup = () => {
   const email = useRef(null)
   const password = useRef(null)
   const confirmpassword = useRef(null)
   const [errormessage,setErrorMessage] = useState()
+  const navigate = useNavigate()
 
   const handleSignup = async() => {
     const message = Validation(
@@ -24,17 +25,17 @@ const Signup = () => {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              email: emailValue,
-              password: passwordValue,
-              confirmPassword: confirmPasswordValue,
+              email: email.current.value,
+              password: password.current.value,
+              confirmPassword: confirmpassword.current.value,
             }),
           });
           //console.log(response)
           const result = await response.json();
           if (response.ok) {
-            setErrorMessage('');
+            navigate("/home")
           } else {
-            setErrorMessage(result.message || 'Failed to create user');
+            setErrorMessage(result.message || 'User Already Present');
           }
         } catch (error) {
           setErrorMessage('Failed to create user');

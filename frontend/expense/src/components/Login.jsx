@@ -1,14 +1,38 @@
 import React, { useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Login = () => {
   const email = useRef(null)
   const password = useRef(null)
   const [errormessage,setErrorMessage] = useState()
+  const navigate = useNavigate()
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email.current.value,
+          password: password.current.value,
+        }),
+        credentials: 'include',
+      });
+      //console.log(response)
+      const result = await response.json();
+      if (response.ok) {
+        navigate('/home');
+      } else {
+        //console.log("error",result)
+        setErrorMessage(result.message || 'Failed to login');
+      }
+    } catch (error) {
+      setErrorMessage('Failed to login');
+    }
+  };
 
-  }
 
   return (
       <div>
