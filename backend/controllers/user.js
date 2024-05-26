@@ -2,13 +2,15 @@ const User = require("../models/user");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken")
 
+const salt = 15
+
 exports.signUp = async (req, res) => {
     const { email, password, confirmPassword } = req.body;
     if (password !== confirmPassword) {
         return res.status(400).json({ message: "Passwords do not match" });
     }
     try {
-        const hashedPassword = await bcryptjs.hash(password, 10);
+        const hashedPassword = await bcryptjs.hash(password, salt);
         const newUser = await User.create({
             email,
             password: hashedPassword,
