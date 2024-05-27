@@ -4,8 +4,9 @@ const sequelize = require("./utils/database");
 const cookieParser = require("cookie-parser")
 require("dotenv").config();
 
-// Import the user routes
+// routes
 const userRouter = require("./routes/user");
+const expenseRouter = require("./routes/expense")
 
 const app = express();
 
@@ -18,8 +19,8 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser())
 
-// Use the user router for /user routes
 app.use("/user", userRouter);
+app.use("/expense",expenseRouter)
 
 sequelize.sync()
     .then(() => {

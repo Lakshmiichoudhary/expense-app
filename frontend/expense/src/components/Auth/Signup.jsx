@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import Validation from '../utils/Validation'
+import Validation from '../../utils/Validation'
 import { Link, useNavigate } from 'react-router-dom'
 
 const Signup = () => {
