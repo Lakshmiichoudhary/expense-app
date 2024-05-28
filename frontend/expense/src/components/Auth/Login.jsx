@@ -23,6 +23,8 @@ const Login = () => {
       //console.log(response)
       const result = await response.json();
       if (response.ok) {
+        localStorage.setItem('token', result.token); 
+        console.log("Token set in localStorage:", result.token);  
         navigate('/home');
       } else {
         //console.log("error",result)
