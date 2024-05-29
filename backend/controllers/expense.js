@@ -26,7 +26,7 @@ exports.getExpense = async (req, res) => {
 
 exports.deleteExpense = async (req, res) => {
     const { id } = req.params;
-    const userId = req.user.id; // Extracted from the JWT
+    const userId = req.user.id; 
     try {
         const result = await Expense.destroy({ where: { id, userId } });
         if (result === 0) {

@@ -7,6 +7,7 @@ require("dotenv").config();
 // routes
 const userRouter = require("./routes/user");
 const expenseRouter = require("./routes/expense")
+const paymentRouter = require("./routes/order");
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(cookieParser())
 
 app.use("/user", userRouter);
 app.use("/expense",expenseRouter)
+app.use("/order",paymentRouter)
 
 sequelize.sync()
     .then(() => {

@@ -1,6 +1,6 @@
-// Home.jsx
 import React, { useState } from 'react';
 import ExpenseData from './ExpenseData';
+import Order from './Order';
 
 const Home = () => {
     const [amount, setAmount] = useState("");
@@ -36,7 +36,7 @@ const Home = () => {
 
     return (
         <div>
-            <h1 className='font-bold bg-cyan-900 p-4 text-white text-2xl'>Expense Tracker</h1>
+            <Order />
             <div className='md:flex'>
                 <form className='p-8 rounded-lg my-9 md:ml-24 md:w-4/12' onSubmit={handleSubmit}>
                     <div className='p-2 shadow-lg from-black mt-2 bg-slate-300'>
