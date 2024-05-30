@@ -24,7 +24,9 @@ exports.signUp = async (req, res) => {
 };
 
 const generateToken = (id,isPremium) => {
-    return jwt.sign({ id,isPremium }, process.env.JWT_TOKEN);
+    const token = jwt.sign({ id,isPremium }, process.env.JWT_TOKEN);
+    //console.log("token" , token)
+    return token
 };
 
 exports.login = async (req, res) => {
@@ -36,13 +38,13 @@ exports.login = async (req, res) => {
         }
         const isPasswordValid = await bcryptjs.compare(password, user.password);
         if (!isPasswordValid) {
-            return res.status(400).json({ message: "Invalid email and password" });
+            return res.status(400).json({ message: "Invalid email or password" });
         }
-        // Generate token and send it in the response
-        const token = generateToken(user.id ,user.isPremium);
+        const token = generateToken(user.id, user.isPremium);
+        //console.log("Login successful, token:", token); 
         return res.status(200).json({ message: "Login successful", token });
     } catch (error) {
-        console.error(error);
+        console.error("Error during login:", error);
         res.status(500).json({ message: "Failed to login" });
     }
 };

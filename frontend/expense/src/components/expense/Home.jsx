@@ -12,6 +12,7 @@ const Home = () => {
         e.preventDefault();
         try {
             const token = localStorage.getItem('token');
+            console.log("token" , token)
             const payload = { amount, description, category };
             console.log('Submitting expense:', payload); 
             const response = await fetch("http://localhost:3000/expense", {
@@ -60,7 +61,7 @@ const Home = () => {
                     <button className='p-3 mt-3 w-full font-semibold rounded-md bg-teal-500 hover:bg-teal-700 text-white'>Add Expense</button>
                 </form>
                 <div className='p-2 md:my-12 md:ml-11 md:w-6/12'>
-                    <ExpenseData expense={expense} setExpense={setExpense} />
+                    <ExpenseData expense={expense} />
                 </div>
             </div>
         </div>

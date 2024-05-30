@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const ExpenseData = ({ expense, setExpense }) => {
+const ExpenseData = ({ expense }) => {
+    const [expenses, setExpenses] = useState([]);
+
     useEffect(() => {
         const fetchExpense = async () => {
             try {
@@ -10,20 +12,19 @@ const ExpenseData = ({ expense, setExpense }) => {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`
-                    },
-                    credentials: 'include'
+                    }
                 });
                 if (!response.ok) {
                     throw new Error("Failed to fetch expense");
                 }
                 const data = await response.json();
-                setExpense(data);
+                setExpenses(data);
             } catch (error) {
                 console.error(error);
             }
         };
         fetchExpense();
-    }, [setExpense]);
+    }, [expense]);
 
     const handleDelete = async (id) => {
         try {
@@ -39,7 +40,7 @@ const ExpenseData = ({ expense, setExpense }) => {
             if (!response.ok) {
                 throw new Error("Something went wrong");
             }
-            setExpense(expense.filter(exp => exp.id !== id));
+            setExpenses(expenses.filter(exp => exp.id !== id));
         } catch (error) {
             console.error(error);
         }
@@ -49,7 +50,7 @@ const ExpenseData = ({ expense, setExpense }) => {
         <div>
             <h1 className='p-2 font-semibold text-2xl text-center'>HISTORY</h1>
             <ul>
-                {expense.map(exp => (
+                {expenses.map(exp => (
                     <div key={exp.id} className='p-2 md:mx-4 w-full flex justify-between my-2 shadow-2xl rounded-md from-black font-medium bg-slate-300'>
                         <li className='p-2'>Rs: {exp.amount}</li>
                         <li className='p-2'>{exp.description}</li>

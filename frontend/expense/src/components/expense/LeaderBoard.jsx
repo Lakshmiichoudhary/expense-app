@@ -6,14 +6,15 @@ const LeaderBoard = () => {
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
-        const token = localStorage.getItem('token'); // Assuming the token is stored in localStorage
+        const token = localStorage.getItem('token'); 
+        //console.log("token",token)
         const response = await fetch('http://localhost:3000/premium/leaderboard', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
         });
         const data = await response.json();
-        console.log(data);
+        //console.log(data);
         setUsers(data);
       } catch (error) {
         console.error("Failed to fetch leaderboard data", error);
@@ -25,16 +26,17 @@ const LeaderBoard = () => {
 
   return (
     <>
-      <div className='bg-cyan-900 p-3'>
+      <div className='bg-cyan-900 p-4'>
         <h1 className='mx-10 font-bold text-white text-2xl'>Expense Tracker</h1>
       </div>
-      <div className='p-2 w-5/12 mt-6 mx-auto left-0 right-0 bg-slate-400'>
-        <h1 className='p-2 font-semibold text-center text-2xl'>LeaderBoard</h1>
+      <div className='p-2 w-7/12 mt-10 mx-auto left-0 right-0 bg-slate-300 rounded-md shadow-xl from-black'>
+        <h1 className='p-2 font-bold text-center text-2xl text-teal-800'>LeaderBoard</h1>
         <ul>
           {users.map((user, index) => (
-            <li key={index} className='p-2'>
-              {user.name}: ${user.total_expense}
-            </li>
+            <div key={index} className='p-2 flex justify-between mx-6'>
+              <span><strong>NAME : </strong>{user.name}</span> 
+              <li><strong>TOTAL EXPENSE : </strong>{user.total_expense}</li>
+            </div>
           ))}
         </ul>
       </div>
