@@ -51,6 +51,7 @@ exports.updatePayment = async (req, res, next) => {
       return res.status(201).json({
         success: true,
         message: "You are a premium user now!",
+        isPremium: true,
       });
     } else if (status === "FAILED") {
       await order.update({ paymentid: payment_id, status: status });

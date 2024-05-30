@@ -8,6 +8,10 @@ const User = sequelize.define("user", {
         allowNull: false,
         primaryKey: true
     },
+    name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
     email: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -16,6 +20,15 @@ const User = sequelize.define("user", {
     password: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    isPremium: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+    },
+    total_expense: {
+        type: Sequelize.DECIMAL,
+        allowNull:false,
+        defaultValue: 0,
     }
 });
 

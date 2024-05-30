@@ -5,7 +5,6 @@ const ExpenseData = ({ expense, setExpense }) => {
         const fetchExpense = async () => {
             try {
                 const token = localStorage.getItem('token');
-                //console.log(token)
                 const response = await fetch("http://localhost:3000/expense", {
                     method: "GET",
                     headers: {
@@ -18,7 +17,6 @@ const ExpenseData = ({ expense, setExpense }) => {
                     throw new Error("Failed to fetch expense");
                 }
                 const data = await response.json();
-                //console.log(data)
                 setExpense(data);
             } catch (error) {
                 console.error(error);

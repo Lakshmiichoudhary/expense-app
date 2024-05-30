@@ -12,6 +12,8 @@ const Home = () => {
         e.preventDefault();
         try {
             const token = localStorage.getItem('token');
+            const payload = { amount, description, category };
+            console.log('Submitting expense:', payload); 
             const response = await fetch("http://localhost:3000/expense", {
                 method: "POST",
                 headers: {

@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Order = () => {
     const [payment, setPayment] = useState(false);
 
+    useEffect(() => {
+        const isPremium = localStorage.getItem('isPremium') === 'true';
+        setPayment(isPremium);
+    }, []);
+
     const handlePremium = async () => {
         try {
             const token = localStorage.getItem('token');
+            //console.log(token)
             const response = await fetch("http://localhost:3000/order/createOrder", {
                 method: "POST",
                 headers: {
@@ -49,8 +56,8 @@ const Order = () => {
                         if (!res.ok) {
                             throw new Error("Failed to update order status");
                         }
-
                         setPayment(true);
+                        localStorage.setItem('isPremium', 'true');
                         alert("Transaction successful");
                     } catch (error) {
                         console.error(error);
@@ -63,7 +70,7 @@ const Order = () => {
                     "contact": "9999999999"
                 },
                 "notes": {
-                  "address": "Razorpay Corporate Office"
+                    "address": "Razorpay Corporate Office"
                 },
                 "theme": {
                     "color": "#F37254"
@@ -100,14 +107,29 @@ const Order = () => {
     };
 
     return (
-        <div className='flex bg-cyan-900 p-4 justify-between'>
-            <h1 className='mx-10 font-bold text-white text-2xl'>Expense Tracker</h1>
+        <div>
             {payment ? (
-                <h2 className='mx-16 text-white font-bold'>You are a premium user</h2>
+                <div>
+                <div className=' bg-cyan-900 p-3'>
+                    <h1 className='mx-10 font-bold text-white text-2xl'>Expense Tracker</h1>
+                </div>
+                <div className='p-3 bg-teal-600 flex justify-end'>
+                    <h2 className='font-bold p-2 text-white'>
+                        You are a premium user!!
+                    </h2>
+                    <Link to="/leaderboard"><button 
+                    className='mx-12 bg-white p-2 rounded-md text-teal-600 font-bold'>
+                        LeaderBoard
+                    </button></Link>
+                </div>
+                </div>
             ) : (
-                <button className='mx-16 text-teal-600 bg-white rounded-md p-2 font-bold' onClick={handlePremium}>
-                    BUY PREMIUM
-                </button>
+                <div className='flex bg-cyan-900 p-3 justify-between'>
+                    <h1 className='mx-10 font-bold text-white text-2xl'>Expense Tracker</h1>
+                    <button className='mx-16 text-teal-600 bg-white rounded-md p-2 font-bold' onClick={handlePremium}>
+                        BUY PREMIUM
+                    </button>
+                </div>
             )}
         </div>
     );
