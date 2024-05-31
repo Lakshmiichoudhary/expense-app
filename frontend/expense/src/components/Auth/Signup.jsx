@@ -47,7 +47,7 @@ const Signup = () => {
   };
 
   return (
-    <div>
+    <>
       <h1 className="font-bold bg-cyan-900 p-4 text-white text-2xl">Expense Tracker</h1>
       <div className="lg:w-4/12 md:w-5/6 mx-3 md:mx-auto right-0 left-0 bg-cyan-900 rounded-lg my-16 md:p-8 lg:p-11 p-4 text-center">
         <h1 className="font-bold text-2xl mb-2 text-white">Signup</h1>
@@ -88,7 +88,7 @@ const Signup = () => {
           </Link>
         </form>
       </div>
-    </div>
+    </>
   );
 };
 

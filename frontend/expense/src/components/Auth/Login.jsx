@@ -8,10 +8,10 @@ const Login = () => {
     const navigate = useNavigate();
 
     const handleLogin = async (event) => {
-        event.preventDefault(); // Prevent the default form submission behavior
+        event.preventDefault(); 
 
-        const email = emailRef.current.value; // Get email from form input
-        const password = passwordRef.current.value; // Get password from form input
+        const email = emailRef.current.value; 
+        const password = passwordRef.current.value; 
 
         try {
             const response = await fetch("http://localhost:3000/user/login", {
@@ -39,7 +39,7 @@ const Login = () => {
     };
 
     return (
-        <div>
+        <>
             <h1 className='font-bold bg-cyan-900 p-4 text-white text-2xl'>Expense Tracker</h1>
             <div className='lg:w-3/12 md:w-5/6 mx-3 md:mx-auto right-0 left-0 bg-cyan-900 rounded-lg my-24 md:p-8 lg:p-11 p-4 text-center'>
                 <h1 className='font-bold text-2xl mb-2 text-white'>Login</h1>
@@ -47,6 +47,7 @@ const Login = () => {
                     <input className='p-2 outline-none bg-slate-300 w-full m-2' ref={emailRef} type='email' placeholder='email' />
                     <input className='p-2 outline-none bg-slate-300 w-full m-2' ref={passwordRef} type='password' placeholder='password' />
                     <p className='p-2 text-red-600'>{errorMessage}</p>  
+                    <Link to="/password" className='p-2 font-semibold text-teal-500'>Forgot Password ??</Link>
                     <button className='p-2 m-2 bg-teal-500 hover:bg-teal-700 w-full text-white rounded-md' type='submit'>
                         Login
                     </button>
@@ -55,7 +56,7 @@ const Login = () => {
                     </Link>
                 </form>
             </div>
-        </div>
+        </>
     );
 };
 
