@@ -5,21 +5,26 @@ const jwt = require("jsonwebtoken");
 const salt = 15;
 
 exports.signUp = async (req, res) => {
-    const {name, email, password, confirmPassword } = req.body;
+    const { name, email, password, confirmPassword } = req.body;
     if (password !== confirmPassword) {
         return res.status(400).json({ message: "Passwords do not match" });
     }
     try {
+        const existingUser = await User.findOne({ where: { email } });
+        if (existingUser) {
+            return res.status(400).json({ message: "User already registered" });
+        }
         const hashedPassword = await bcryptjs.hash(password, salt);
         const newUser = await User.create({
             name,
             email,
             password: hashedPassword,
         });
-        res.status(201).json({ message: "User created successfully", user: newUser });
+        const token = generateToken(newUser.id, newUser.isPremium);
+        res.status(201).json({ message: "User created successfully", token });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "user already registred" });
+        res.status(500).json({ message: "Failed to create user" });
     }
 };
 
@@ -42,7 +47,11 @@ exports.login = async (req, res) => {
         }
         const token = generateToken(user.id, user.isPremium);
         //console.log("Login successful, token:", token); 
-        return res.status(200).json({ message: "Login successful", token });
+        return res.status(200).json({
+            message: "Login successful",
+            token,
+            isPremium: user.isPremium 
+          });
     } catch (error) {
         console.error("Error during login:", error);
         res.status(500).json({ message: "Failed to login" });

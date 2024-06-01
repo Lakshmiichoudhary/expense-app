@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 
 const ExpenseHistory = () => {
-  const [view, setView] = useState('daily'); // State to track the current view
+  const [view, setView] = useState('daily'); 
 
   const handleDownload = () => {
-    // Logic to download the expenses as a file
     const data = [
       { date: '2023-05-01', type: 'Expense', amount: 50 },
       { date: '2023-05-01', type: 'Income', amount: 100 },
-      // Add more data here
     ];
     const fileName = 'expenses.csv';
     const csvData = data.map(row => Object.values(row).join(',')).join('\n');
@@ -66,7 +64,6 @@ const ExpenseHistory = () => {
               </tr>
             </thead>
             <tbody>
-              {/* Example data, replace with dynamic content */}
               <tr>
                 <td className='py-2 px-4 border'>2023-05-01</td>
                 <td className='py-2 px-4 border'>Expense</td>

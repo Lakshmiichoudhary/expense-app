@@ -11,7 +11,7 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const handleSignup = async (event) => {
-    event.preventDefault(); // Prevent the default form submission
+    event.preventDefault(); 
     const message = Validation(
       email.current.value,
       password.current.value,
@@ -37,14 +37,16 @@ const Signup = () => {
 
       const result = await response.json();
       if (response.ok) {
+        localStorage.setItem('token', result.token); 
         navigate('/home');
       } else {
-        setErrorMessage(result.message || 'User Already Present');
+        setErrorMessage(result.message || 'User already registered');
       }
     } catch (error) {
       setErrorMessage('Failed to create user');
     }
-  };
+};
+
 
   return (
     <>

@@ -8,10 +8,10 @@ const authenticate = (req, res, next) => {
         console.log("Authentication Failed! No token provided.");
         return res.status(401).json({ message: "Authentication failed" });
     }
-    
+
     const token = authHeader.replace("Bearer ", "");
-    console.log(token)
-    
+    console.log(token);
+
     try {
         const decoded = jwt.verify(token, process.env.JWT_TOKEN);
         User.findOne({ where: { id: decoded.id } })
