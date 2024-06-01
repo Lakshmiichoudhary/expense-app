@@ -48,7 +48,7 @@ const ExpenseData = ({ expense }) => {
 
     return (
         <div>
-            <h1 className='p-2 font-semibold text-2xl text-center'>HISTORY</h1>
+            <h1 className='p-2 font-semibold text-2xl text-center'>YOUR EXPENSES</h1>
             <ul>
                 {expenses.map(exp => (
                     <div key={exp.id} className='p-2 md:mx-4 w-full flex justify-between my-2 shadow-2xl rounded-md from-black font-medium bg-slate-300'>

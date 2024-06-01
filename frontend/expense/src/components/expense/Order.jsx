@@ -114,12 +114,16 @@ const Order = () => {
                     <h1 className='mx-10 font-bold text-white text-2xl'>Expense Tracker</h1>
                 </div>
                 <div className='p-3 bg-teal-600 flex justify-end'>
-                    <h2 className='font-bold p-2 text-white'>
+                    <h2 className='md:font-bold p-2 text-white'>
                         You are a premium user!!
                     </h2>
                     <Link to="/leaderboard"><button 
-                    className='mx-12 bg-white p-2 rounded-md text-teal-600 font-bold'>
+                    className='bg-cyan-900 text-white px-4 py-2 mx-4'>
                         LeaderBoard
+                    </button></Link>
+                    <Link to="/Expensehistory"><button 
+                    className='bg-cyan-900 text-white px-4 py-2 mx-4'>
+                        Expense History
                     </button></Link>
                 </div>
                 </div>

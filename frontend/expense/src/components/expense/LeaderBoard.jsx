@@ -29,11 +29,11 @@ const LeaderBoard = () => {
       <div className='bg-cyan-900 p-4'>
         <h1 className='mx-10 font-bold text-white text-2xl'>Expense Tracker</h1>
       </div>
-      <div className='p-2 w-7/12 mt-10 mx-auto left-0 right-0 bg-slate-300 rounded-md shadow-xl from-black'>
+      <div className='p-2 md:w-7/12 mt-10 mx-auto left-0 right-0 bg-slate-300 rounded-md shadow-xl from-black'>
         <h1 className='p-2 font-bold text-center text-2xl text-teal-800'>LeaderBoard</h1>
         <ul>
           {users.map((user, index) => (
-            <div key={index} className='p-2 flex justify-between mx-6'>
+            <div key={index} className='p-2 flex justify-between md:mx-6 mx-4'>
               <span><strong>NAME : </strong>{user.name}</span> 
               <li><strong>TOTAL EXPENSE : </strong>{user.total_expense}</li>
             </div>

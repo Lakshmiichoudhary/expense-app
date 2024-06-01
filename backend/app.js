@@ -9,6 +9,7 @@ const userRouter = require("./routes/user");
 const expenseRouter = require("./routes/expense")
 const paymentRouter = require("./routes/order");
 const premiumRouter = require("./routes/premium")
+const passwordRoute = require("./routes/forgetPassword")
 
 const app = express();
 
@@ -25,6 +26,8 @@ app.use("/user", userRouter);
 app.use("/expense",expenseRouter)
 app.use("/order",paymentRouter)
 app.use("/premium",premiumRouter)
+app.use("/password",passwordRoute)
+
 
 sequelize.sync()
     .then(() => {
