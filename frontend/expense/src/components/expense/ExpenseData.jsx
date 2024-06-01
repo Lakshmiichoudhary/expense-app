@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 const ExpenseData = ({ expense }) => {
     const [expenses, setExpenses] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
 
     useEffect(() => {
         const fetchExpense = async () => {
@@ -18,7 +20,8 @@ const ExpenseData = ({ expense }) => {
                     throw new Error("Failed to fetch expense");
                 }
                 const data = await response.json();
-                setExpenses(data);
+                setExpenses(data.expenses); // Updated line
+                setTotalPages(data.lastPage);
             } catch (error) {
                 console.error(error);
             }
@@ -46,6 +49,13 @@ const ExpenseData = ({ expense }) => {
         }
     };
 
+    const goToPage = (pageNumber) => {
+        if (pageNumber >= 1 && pageNumber <= totalPages) {
+            setCurrentPage(pageNumber);
+        }
+    };
+
+
     return (
         <div>
             <h1 className='p-2 font-semibold text-2xl text-center'>YOUR EXPENSES</h1>
@@ -59,6 +69,10 @@ const ExpenseData = ({ expense }) => {
                     </div>
                 ))}
             </ul>
+            <div className='p-2 text-center'>
+                <button className='p-2 rounded-sm mx-2 bg-slate-200' onClick={() => goToPage(currentPage - 1)}>1</button>
+                <button className='p-2 rounded-sm mx-2 bg-slate-200' onClick={() => goToPage(currentPage + 1)}>2</button>
+            </div>
         </div>
     );
 };
