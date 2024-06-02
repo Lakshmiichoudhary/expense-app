@@ -2,6 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const sequelize = require("./utils/database");
 const cookieParser = require("cookie-parser")
+const path = require("path")
+const helmet = require("helmet")
+const morgan = require("morgan")
+const fs = require("fs")
 require("dotenv").config();
 
 // routes
@@ -18,9 +22,15 @@ const corsOptions = {
     credentials: true, 
 };
 
+const acessLog = fs.createWriteStream(path.join(__dirname ,"acess.log"),{
+    flags : "a"
+})
+
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(cookieParser())
+app.use(cookieParser());
+app.use(helmet());
+app.use(morgan("combined",{ stream : acessLog}));
 
 app.use("/user", userRouter);
 app.use("/expense",expenseRouter)

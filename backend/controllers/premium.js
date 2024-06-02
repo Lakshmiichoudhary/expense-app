@@ -9,7 +9,7 @@ exports.showLeaderboard = async (req, res) => {
     //console.log("Leaderboard data:", users); 
     res.status(201).json(users);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(500).json({ message: "Failed to fetch leaderboard data" });
   }
 };

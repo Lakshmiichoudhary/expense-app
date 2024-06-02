@@ -19,7 +19,7 @@ exports.forgetPassword = async (req, res) => {
         const user = await User.findOne({ where: { email } });
 
         if (!user) {
-            console.log('User not found');
+            //console.log('User not found');
             return res.status(404).json({ error: 'User not found' });
         }
 
@@ -35,7 +35,7 @@ exports.forgetPassword = async (req, res) => {
             textContent: `Reset your password using the following link: ${resetUrl}`
         });
 
-        console.log('Password reset email sent');
+        //console.log('Password reset email sent');
         res.status(200).json({ message: 'Password reset email sent' });
     } catch (error) {
         console.error('Error in forgetPassword:', error);
