@@ -26,6 +26,8 @@ const acessLog = fs.createWriteStream(path.join(__dirname ,"acess.log"),{
     flags : "a"
 })
 
+const PORT = process.env.PORT || 4000;
+
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
@@ -41,8 +43,8 @@ app.use("/password",passwordRoute)
 
 sequelize.sync()
     .then(() => {
-        app.listen(3000, () => {
-            console.log("server running at 3000");
+        app.listen(PORT, () => {
+            console.log("server running at PORT");
         });
     })
     .catch(error => {

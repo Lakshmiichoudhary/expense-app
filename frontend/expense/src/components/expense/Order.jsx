@@ -142,10 +142,10 @@ const Order = () => {
                 <div className='flex bg-cyan-900 p-3 justify-between'>
                     <h1 className='mx-10 font-bold text-white text-2xl'>Expense Tracker</h1>
                     <div>
-                    <button className='mx-16 text-teal-600  bg-gray-200 rounded-md p-2 font-bold' onClick={handlePremium}>
+                    <button className='mx-4 text-teal-600  bg-gray-200 rounded-md p-2 font-bold' onClick={handlePremium}>
                         BUY PREMIUM
                     </button>
-                    <button onClick={handleLogout} className='mx-16 px-3 py-2 rounded-md bg-gray-200 text-black'>Logout</button>
+                    <button onClick={handleLogout} className='mr-6 text-teal-600  bg-gray-200 rounded-md p-2 font-bold'>Logout</button>
                     </div>
                 </div>
             )}
