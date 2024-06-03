@@ -41,7 +41,7 @@ app.use("/premium",premiumRouter)
 app.use("/password",passwordRoute)
 
 
-sequelize.sync()
+sequelize.sync({force : false})
     .then(() => {
         app.listen(PORT, () => {
             console.log("server running at PORT");
