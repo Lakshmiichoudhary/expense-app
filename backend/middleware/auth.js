@@ -10,7 +10,7 @@ const authenticate = (req, res, next) => {
     }
 
     const token = authHeader.replace("Bearer ", "");
-    console.log(token);
+    //console.log(token);
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_TOKEN);

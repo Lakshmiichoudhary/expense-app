@@ -45,7 +45,7 @@ exports.updatePayment = async (req, res, next) => {
         if (status === "SUCCESS") {
             await Promise.all([
                 order.update({ paymentid: payment_id, status: status }),
-                req.user.update({ isPremium: true })  // Ensure it is 'isPremium' and not 'ispremium'
+                req.user.update({ isPremium: true })  
             ]);
 
             return res.status(201).json({
@@ -61,7 +61,7 @@ exports.updatePayment = async (req, res, next) => {
             });
         }
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).send("Internal Server Error");
     }
 };
